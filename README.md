@@ -25,12 +25,12 @@ MiniSupermarketSystem/
 │
 ├── MiniSupermarket.API/          # Dự án Web API (Backend)
 │   ├── Controllers/              # Chứa CategoriesController (CRUD & Search)
-│   ├── Models/                   # Chứa lớp thực thể Category.cs
+│   ├── Models/                   # Chứa lớp thực thể Category.cs,Roles.cs
 │   └── Program.cs                # Cấu hình dịch vụ và Middleware
 │
 └── MiniSupermarket.WinForms/     # Dự án Windows Forms (Frontend Client)
     └── FormCategoryManagement.cs # Giao diện quản lý danh mục CRUD
-
+    └── FormRoleManagement.cs     # Xây dựng giao diện WinForms Client 
 
 🚀 4. Hướng dẫn Chạy và Kiểm thử Dự án
 Bước 1: Chạy phía Backend (Web API)
