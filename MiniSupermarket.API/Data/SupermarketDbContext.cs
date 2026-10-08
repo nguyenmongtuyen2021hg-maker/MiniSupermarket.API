@@ -56,6 +56,25 @@ namespace MiniSupermarket.API.Data
                 new Customer { CustomerId = 14, CustomerName = "Võ Văn Sơn", PhoneNumber = "0908765432", MembershipRank = "Chuẩn", RewardPoints = 30 },
                 new Customer { CustomerId = 15, CustomerName = "Dương Thị Tuyết", PhoneNumber = "0987654321", MembershipRank = "Kim Cương", RewardPoints = 500 }
             );
+
+            // Nạp sẵn 15 sản phẩm mẫu (Products) tương ứng với 15 danh mục
+            modelBuilder.Entity<Product>().HasData(
+                new Product { ProductId = 1, Barcode = "893456789001", ProductName = "Snack Oishi Cay 42g", Price = 7000m, StockQuantity = 100, CategoryId = 1 },
+                new Product { ProductId = 2, Barcode = "893456789002", ProductName = "Nước ngọt Coca-Cola 320ml", Price = 10000m, StockQuantity = 120, CategoryId = 2 },
+                new Product { ProductId = 3, Barcode = "893456789003", ProductName = "Sữa tươi tiệt trùng Vinamilk 180ml", Price = 9000m, StockQuantity = 80, CategoryId = 3 },
+                new Product { ProductId = 4, Barcode = "893456789004", ProductName = "Mì Hảo Hảo Tôm Chua Cay 75g", Price = 4500m, StockQuantity = 250, CategoryId = 4 },
+                new Product { ProductId = 5, Barcode = "893456789005", ProductName = "Nước mắm Nam Ngư Đệ Nhị 900ml", Price = 25000m, StockQuantity = 50, CategoryId = 5 },
+                new Product { ProductId = 6, Barcode = "893456789006", ProductName = "Dầu ăn Tường An Cooking Oil 1L", Price = 48000m, StockQuantity = 60, CategoryId = 6 },
+                new Product { ProductId = 7, Barcode = "893456789007", ProductName = "Gạo thơm ST25 túi 5kg", Price = 160000m, StockQuantity = 30, CategoryId = 7 },
+                new Product { ProductId = 8, Barcode = "893456789008", ProductName = "Cá hộp Ba Cô Gái sốt cà 155g", Price = 18000m, StockQuantity = 90, CategoryId = 8 },
+                new Product { ProductId = 9, Barcode = "893456789009", ProductName = "Nước rửa chén Sunlight Chanh 750g", Price = 28000m, StockQuantity = 70, CategoryId = 9 },
+                new Product { ProductId = 10, Barcode = "893456789010", ProductName = "Dầu gội Clear Bạc Hà mát lạnh 630g", Price = 145000m, StockQuantity = 40, CategoryId = 10 },
+                new Product { ProductId = 11, Barcode = "893456789011", ProductName = "Giấy vệ sinh Pulppy 10 cuộn 3 lớp", Price = 75000m, StockQuantity = 45, CategoryId = 11 },
+                new Product { ProductId = 12, Barcode = "893456789012", ProductName = "Màng bọc thực phẩm Ringo 30cm", Price = 32000m, StockQuantity = 50, CategoryId = 12 },
+                new Product { ProductId = 13, Barcode = "893456789013", ProductName = "Cà phê G7 3in1 hộp 18 gói", Price = 58000m, StockQuantity = 85, CategoryId = 13 },
+                new Product { ProductId = 14, Barcode = "893456789014", ProductName = "Tập vở học sinh 96 trang Thiên Long", Price = 8000m, StockQuantity = 200, CategoryId = 14 },
+                new Product { ProductId = 15, Barcode = "893456789015", ProductName = "Xúc xích tiệt trùng CP Red 175g", Price = 22000m, StockQuantity = 110, CategoryId = 15 }
+            );
         }
     }
 }

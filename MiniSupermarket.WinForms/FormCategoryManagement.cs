@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -32,6 +32,13 @@ namespace MiniSupermarket.WinForms
                 // Gửi request GET tới endpoint "categories", tự động giải tuần tự hóa chuỗi JSON thành List<CategoryDto>
                 var categories = await _client.GetFromJsonAsync<List<CategoryDto>>("categories");
                 dgvCategories.DataSource = categories; // Gán nguồn dữ liệu cho bảng hiển thị
+                
+                if (dgvCategories.Columns["CategoryId"] != null)
+                    dgvCategories.Columns["CategoryId"].HeaderText = "Mã Nhóm";
+                if (dgvCategories.Columns["CategoryName"] != null)
+                    dgvCategories.Columns["CategoryName"].HeaderText = "Tên Nhóm Hàng";
+                if (dgvCategories.Columns["Description"] != null)
+                    dgvCategories.Columns["Description"].HeaderText = "Mô Tả";
             }
             catch (Exception ex)
             {
