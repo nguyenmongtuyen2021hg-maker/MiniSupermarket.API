@@ -1,6 +1,6 @@
 # 🛒 NGHIÊN CỨU VÀ HIỆN THỰC HÓA PHẦN MỀM QUẢN LÝ BÁN LẺ THEO CHUẨN KIẾN TRÚC DOANH NGHIỆP -- TIỆM TẠP HÓA NGỌC MAI
 > **Môn học:** Lập trình Ứng dụng .NET Core (Mã môn: 229162)  
-> **Buổi thực hành:** Buổi 3 - Tích hợp SQL Server & Entity Framework Core Code-First (CRUD & 15 Nhóm hàng)
+> **Buổi thực hành:** Buổi 4 - Kiến trúc Giao diện WinForms Shell (Sidebar & Main Workspace) và Điều hướng Phân quyền RBAC (Admin / Cashier / Warehouse)
 
 ---
 
