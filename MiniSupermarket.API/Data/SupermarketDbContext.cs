@@ -13,6 +13,7 @@ namespace MiniSupermarket.API.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         // Cấu hình dữ liệu mồi ban đầu (Data Seeding)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -74,6 +75,25 @@ namespace MiniSupermarket.API.Data
                 new Product { ProductId = 13, Barcode = "893456789013", ProductName = "Cà phê G7 3in1 hộp 18 gói", Price = 58000m, StockQuantity = 85, CategoryId = 13 },
                 new Product { ProductId = 14, Barcode = "893456789014", ProductName = "Tập vở học sinh 96 trang Thiên Long", Price = 8000m, StockQuantity = 200, CategoryId = 14 },
                 new Product { ProductId = 15, Barcode = "893456789015", ProductName = "Xúc xích tiệt trùng CP Red 175g", Price = 22000m, StockQuantity = 110, CategoryId = 15 }
+            );
+
+            // Nạp sẵn 15 tài khoản nhân viên phân quyền theo đề bài Buổi 4
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, Username = "admin01", Password = "123456", FullName = "Nguyễn Quản Trị", Role = "Admin", IsActive = true },
+                new User { Id = 2, Username = "admin02", Password = "123456", FullName = "Trần Giám Đốc", Role = "Admin", IsActive = true },
+                new User { Id = 3, Username = "cashier01", Password = "123456", FullName = "Lê Thu Ngân", Role = "Cashier", IsActive = true },
+                new User { Id = 4, Username = "cashier02", Password = "123456", FullName = "Phạm Bán Hàng", Role = "Cashier", IsActive = true },
+                new User { Id = 5, Username = "cashier03", Password = "123456", FullName = "Hoàng Thu Ngân", Role = "Cashier", IsActive = true },
+                new User { Id = 6, Username = "cashier04", Password = "123456", FullName = "Vũ Thị Quầy", Role = "Cashier", IsActive = true },
+                new User { Id = 7, Username = "cashier05", Password = "123456", FullName = "Đỗ Bán Lẻ", Role = "Cashier", IsActive = true },
+                new User { Id = 8, Username = "ware01", Password = "123456", FullName = "Ngô Quản Kho", Role = "Warehouse", IsActive = true },
+                new User { Id = 9, Username = "ware02", Password = "123456", FullName = "Bùi Kiểm Kê", Role = "Warehouse", IsActive = true },
+                new User { Id = 10, Username = "ware03", Password = "123456", FullName = "Dương Thủ Kho", Role = "Warehouse", IsActive = true },
+                new User { Id = 11, Username = "ware04", Password = "123456", FullName = "Lý Nhập Hàng", Role = "Warehouse", IsActive = true },
+                new User { Id = 12, Username = "admin_backup", Password = "123456", FullName = "Đặng Hỗ Trợ", Role = "Admin", IsActive = true },
+                new User { Id = 13, Username = "cashier06", Password = "123456", FullName = "Hồ Ca Chiều", Role = "Cashier", IsActive = true },
+                new User { Id = 14, Username = "ware05", Password = "123456", FullName = "Trương Vận Chuyển", Role = "Warehouse", IsActive = true },
+                new User { Id = 15, Username = "supervisor", Password = "123456", FullName = "Mai Giám Sát", Role = "Admin", IsActive = true }
             );
         }
     }

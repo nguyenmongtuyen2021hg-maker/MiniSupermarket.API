@@ -10,15 +10,8 @@ namespace MiniSupermarket.WinForms
         {
             ApplicationConfiguration.Initialize();
 
-            FormCategoryManagement frmCategory = new FormCategoryManagement();
-            FormRoleManagement frmRole = new FormRoleManagement();
-            FormCustomerManagement frmCustomer = new FormCustomerManagement();
-
-            frmCategory.Show();
-            frmRole.Show();
-            frmCustomer.Show();
-
-            Application.Run();
+            // Khởi chạy từ màn hình đăng nhập phân quyền FormLogin
+            Application.Run(new FormLogin());
         }
     }
 }

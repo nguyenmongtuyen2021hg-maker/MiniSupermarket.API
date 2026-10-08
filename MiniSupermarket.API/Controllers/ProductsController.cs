@@ -42,6 +42,21 @@ namespace MiniSupermarket.API.Controllers
             return Ok(product);
         }
 
+        // Tra cứu sản phẩm theo Barcode phục vụ quét mã quầy POS
+        [HttpGet("barcode/{barcode}")]
+        public async Task<IActionResult> GetByBarcode(string barcode)
+        {
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Barcode == barcode.Trim());
+
+            if (product == null)
+            {
+                return NotFound(new { message = "Không tìm thấy sản phẩm có mã vạch này!" });
+            }
+            return Ok(product);
+        }
+
         // 3. GET: Tìm kiếm sản phẩm theo tên hoặc mã vạch (/api/products/search?keyword=...)
         [HttpGet("search")]
         public async Task<IActionResult> Search([FromQuery] string keyword)
