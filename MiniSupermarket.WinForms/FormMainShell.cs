@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -17,9 +17,13 @@ namespace MiniSupermarket.WinForms
         private void FormMainShell_Load(object sender, EventArgs e)
         {
             // 1. Hiển thị thông tin phiên người dùng đăng nhập
-            lblUserInfo.Text = $"Nhân viên: {SessionManager.CurrentFullName} ({SessionManager.CurrentUsername}) | Vai trò: [{SessionManager.CurrentRole}]";
+            string displayName = !string.IsNullOrEmpty(SessionManager.CurrentFullName)
+                ? SessionManager.CurrentFullName
+                : SessionManager.CurrentUsername;
 
-            // 2. Kích hoạt phân quyền giao diện theo vai trò (Role-Based Access)
+            lblUserInfo.Text = $"Nhân viên: {displayName} | Vai trò: [{SessionManager.CurrentRole}]";
+
+            // 2. Kích hoạt phân quyền giao diện theo vai trò (Role-Based Access Control)
             ApplyRolePermissions(SessionManager.CurrentRole);
 
             // 3. Mở màn hình mặc định tương ứng với vai trò
@@ -31,7 +35,7 @@ namespace MiniSupermarket.WinForms
         /// </summary>
         public void OpenChildForm(Form childForm, string screenTitle, Button senderButton)
         {
-            // Nếu form con đang mở cùng loại, đóng để nạp lại
+            // Nếu form con đang mở cùng loại, đóng để nạp lại mới
             if (_activeForm != null)
             {
                 _activeForm.Close();
@@ -62,7 +66,7 @@ namespace MiniSupermarket.WinForms
             {
                 if (ctrl is Button btn && btn != btnLogout)
                 {
-                    btn.BackColor = Color.FromArgb(24, 30, 48); // Màu gốc
+                    btn.BackColor = Color.FromArgb(24, 30, 48); // Màu gốc xanh đen
                 }
             }
             activeButton.BackColor = Color.FromArgb(41, 100, 180); // Màu xanh active

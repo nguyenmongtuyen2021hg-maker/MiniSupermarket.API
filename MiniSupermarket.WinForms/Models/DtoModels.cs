@@ -1,4 +1,4 @@
-namespace MiniSupermarket.WinForms.Models
+﻿namespace MiniSupermarket.WinForms.Models
 {
     public class CategoryDto
     {
@@ -16,5 +16,7 @@ namespace MiniSupermarket.WinForms.Models
         public int StockQuantity { get; set; }
         public int CategoryId { get; set; }
         public CategoryDto? Category { get; set; }
+
+        public string CategoryName => Category?.CategoryName ?? string.Empty;
     }
 }
