@@ -7,10 +7,10 @@ namespace MiniSupermarket.WinForms
     public partial class FormCategoryManagement : Form
     {
 
-        // Khởi tạo HttpClient tĩnh kết nối trực tiếp đến Web API (Đảm bảo số Port https://localhost:7123 khớp với API của bạn)
+        // Khởi tạo HttpClient tĩnh kết nối trực tiếp đến Web API (Đảm bảo số Port https://localhost:7118 khớp với API của bạn)
         private static readonly HttpClient _client = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:7123/api/")
+            BaseAddress = new Uri("https://localhost:7118/api/")
         };
 
         public FormCategoryManagement()
