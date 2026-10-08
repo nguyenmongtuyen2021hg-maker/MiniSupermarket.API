@@ -301,7 +301,7 @@ namespace MiniSupermarket.WinForms
             MaximizeBox = false;
             Name = "FormCustomerManagement";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Quản lý Khách hàng - MiniSupermarket";
+            Text = "Quản lý Khách hàng - Tiệm Tạp hóa Ngọc Mai";
             Load += FormCustomerManagement_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).EndInit();
             groupBoxSearch.ResumeLayout(false);

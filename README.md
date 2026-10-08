@@ -1,6 +1,6 @@
-# 🛒 HỆ THỐNG QUẢN LÝ SIÊU THỊ MINI (MINISUPERMARKET SYSTEM)
+# 🛒 NGHIÊN CỨU VÀ HIỆN THỰC HÓA PHẦN MỀM QUẢN LÝ BÁN LẺ THEO CHUẨN KIẾN TRÚC DOANH NGHIỆP -- TIỆM TẠP HÓA NGỌC MAI
 > **Môn học:** Lập trình Ứng dụng .NET Core (Mã môn: 229162)  
-> **Buổi thực hành:** Buổi 1 - Xây dựng Web API quản lý danh mục và kết nối WinForms Client (CRUD)
+> **Buổi thực hành:** Buổi 3 - Tích hợp SQL Server & Entity Framework Core Code-First (CRUD & 15 Nhóm hàng)
 
 ---
 

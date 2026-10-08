@@ -1,4 +1,4 @@
-﻿namespace MiniSupermarket.WinForms
+namespace MiniSupermarket.WinForms
 {
     partial class FormCategoryManagement
     {
@@ -211,7 +211,7 @@
             Controls.Add(List);
             Controls.Add(groupBox1);
             Name = "FormCategoryManagement";
-            Text = "FormCategoryManagement";
+            Text = "Quản lý Nhóm hàng - Tiệm Tạp hóa Ngọc Mai";
             ((System.ComponentModel.ISupportInitialize)dgvCategories).EndInit();
             information.ResumeLayout(false);
             information.PerformLayout();
