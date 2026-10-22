@@ -63,11 +63,11 @@ Lớp học phần: [CCQ2411D]
 
 ## Buổi 5 — ADO.NET, Stored Procedure và giao dịch POS
 
-Buổi 5 được triển khai trực tiếp với SQL Server database `TiemtaphoaNgocMai` đang cấu hình trong `MiniSupermarket.API/appsettings.json`.
+Chuỗi kết nối SQL Server và khóa session được cấu hình riêng qua User Secrets, không lưu giá trị thật trong Git. Xem hướng dẫn đầy đủ tại [README-BUOI5.md](README-BUOI5.md).
 
 ### Chuẩn bị database
 
-Trong SSMS, mở và chạy `MiniSupermarket.API/SqlScripts/Buoi5.sql` trên database `TiemtaphoaNgocMai`. Script chỉ bổ sung cột `Orders.RewardPointsAwarded` nếu chưa có và tạo lại `dbo.sp_GetRevenueByCashier`; dữ liệu hóa đơn hiện có được giữ lại. Cột điểm của các hóa đơn cũ mặc định là 0 vì database trước đây chưa lưu điểm thưởng theo từng hóa đơn.
+Trong SSMS, mở và chạy `MiniSupermarket.API/SqlScripts/Buoi5.sql` trên database đã cấu hình bằng User Secrets. Script chỉ bổ sung cột `Orders.RewardPointsAwarded` nếu chưa có và tạo lại `dbo.sp_GetRevenueByCashier`; dữ liệu hóa đơn hiện có được giữ lại. Cột điểm của các hóa đơn cũ mặc định là 0 vì database trước đây chưa lưu điểm thưởng theo từng hóa đơn.
 
 ### Các phần thực hành
 
@@ -101,3 +101,9 @@ Không dùng thanh toán hợp lệ trên database thật chỉ để thử nghi
 - Trước khi hủy: tạo 1 hóa đơn/2 dòng chi tiết, tồn kho giảm 2 và 3, điểm khách tăng 8.
 - Hủy hóa đơn trả 200 và hoàn nguyên số hóa đơn, chi tiết, tồn kho, điểm về đúng trạng thái ban đầu.
 - Giỏ hàng có món thứ hai vượt kho trả 400; dù hóa đơn và món thứ nhất đã được ghi trong transaction, rollback đưa mọi dữ liệu về trạng thái ban đầu.
+
+---
+
+## Buổi 6 — EF Core, phân trang LINQ và tích hợp WinForms
+
+Buổi 6 bổ sung phân trang/tìm kiếm sản phẩm ở API, eager loading danh mục, bộ lọc nhóm hàng, thanh chuyển trang trên WinForms và API phân trang khách hàng theo điểm thưởng. Chi tiết yêu cầu, endpoint, luồng dữ liệu và cách chạy nằm trong [README-BUOI6.md](README-BUOI6.md).

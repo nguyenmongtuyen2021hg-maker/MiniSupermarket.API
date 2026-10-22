@@ -18,6 +18,67 @@ namespace MiniSupermarket.API.Controllers
             _context = context;
         }
 
+        // GET: api/products/paged?keyword=Coca&pageNumber=1&pageSize=5&categoryId=2
+        [HttpGet("paged")]
+        public async Task<IActionResult> GetPaged(
+            [FromQuery] string? keyword,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 5,
+            [FromQuery] int? categoryId = null)
+        {
+            pageNumber = Math.Max(1, pageNumber);
+            if (pageSize < 1 || pageSize > 50)
+            {
+                pageSize = 5;
+            }
+
+            // Eager-load Category in the database query and keep this read-only query untracked.
+            IQueryable<Product> query = _context.Products
+                .Include(product => product.Category)
+                .AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var search = keyword.Trim();
+                query = query.Where(product =>
+                    product.ProductName.Contains(search) || product.Barcode.Contains(search));
+            }
+
+            if (categoryId.HasValue && categoryId.Value > 0)
+            {
+                query = query.Where(product => product.CategoryId == categoryId.Value);
+            }
+
+            var totalItems = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            pageNumber = totalPages == 0 ? 1 : Math.Min(pageNumber, totalPages);
+
+            var products = await query
+                .OrderBy(product => product.ProductId)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var items = products.Select(product => new ProductItemDto
+            {
+                ProductId = product.ProductId,
+                Barcode = product.Barcode,
+                ProductName = product.ProductName,
+                Price = product.Price,
+                StockQuantity = product.StockQuantity,
+                CategoryId = product.CategoryId,
+                CategoryName = product.Category?.CategoryName ?? string.Empty
+            }).ToList();
+
+            return Ok(new PagedResult<ProductItemDto>
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalItems = totalItems,
+                TotalPages = totalPages,
+                Items = items
+            });
+        }
         // 1. GET: Lấy toàn bộ danh sách sản phẩm (/api/products)
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -130,3 +191,4 @@ namespace MiniSupermarket.API.Controllers
         }
     }
 }
+

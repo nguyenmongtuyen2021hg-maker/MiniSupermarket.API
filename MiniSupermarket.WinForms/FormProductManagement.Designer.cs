@@ -24,6 +24,10 @@ namespace MiniSupermarket.WinForms
             btnLoad = new Button();
             panelCenter = new Panel();
             dgvProducts = new DataGridView();
+            panelPaging = new Panel();
+            btnPrevious = new Button();
+            lblPaging = new Label();
+            btnNext = new Button();
             panelDetail = new Panel();
             groupBoxActions = new GroupBox();
             btnClear = new Button();
@@ -109,6 +113,7 @@ namespace MiniSupermarket.WinForms
             // panelCenter
             // 
             panelCenter.Controls.Add(dgvProducts);
+            panelCenter.Controls.Add(panelPaging);
             panelCenter.Dock = DockStyle.Fill;
             panelCenter.Location = new Point(0, 55);
             panelCenter.Name = "panelCenter";
@@ -116,6 +121,42 @@ namespace MiniSupermarket.WinForms
             panelCenter.Size = new Size(670, 545);
             panelCenter.TabIndex = 1;
             // 
+            // panelPaging
+            panelPaging.BackColor = Color.White;
+            panelPaging.Dock = DockStyle.Bottom;
+            panelPaging.Location = new Point(15, 482);
+            panelPaging.Name = "panelPaging";
+            panelPaging.Size = new Size(640, 48);
+            panelPaging.TabIndex = 1;
+            panelPaging.Controls.Add(btnPrevious);
+            panelPaging.Controls.Add(lblPaging);
+            panelPaging.Controls.Add(btnNext);
+            // btnPrevious
+            btnPrevious.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            btnPrevious.Location = new Point(5, 8);
+            btnPrevious.Name = "btnPrevious";
+            btnPrevious.Size = new Size(120, 30);
+            btnPrevious.TabIndex = 0;
+            btnPrevious.Text = "<< Trang trước";
+            btnPrevious.UseVisualStyleBackColor = true;
+            btnPrevious.Click += btnPrevious_Click;
+            // lblPaging
+            lblPaging.Anchor = AnchorStyles.Top;
+            lblPaging.AutoSize = true;
+            lblPaging.Location = new Point(245, 16);
+            lblPaging.Name = "lblPaging";
+            lblPaging.Size = new Size(126, 15);
+            lblPaging.TabIndex = 1;
+            lblPaging.Text = "Trang 0 / 0 (Tổng: 0)";
+            // btnNext
+            btnNext.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnNext.Location = new Point(510, 8);
+            btnNext.Name = "btnNext";
+            btnNext.Size = new Size(120, 30);
+            btnNext.TabIndex = 2;
+            btnNext.Text = "Trang sau >>";
+            btnNext.UseVisualStyleBackColor = true;
+            btnNext.Click += btnNext_Click;
             // dgvProducts
             // 
             dgvProducts.AllowUserToAddRows = false;
@@ -356,6 +397,10 @@ namespace MiniSupermarket.WinForms
         private Button btnSearch;
         private Button btnLoad;
         private Panel panelCenter;
+        private Panel panelPaging;
+        private Button btnPrevious;
+        private Label lblPaging;
+        private Button btnNext;
         private DataGridView dgvProducts;
         private Panel panelDetail;
         private GroupBox groupBoxInfo;
@@ -378,3 +423,4 @@ namespace MiniSupermarket.WinForms
         private Button btnClear;
     }
 }
+

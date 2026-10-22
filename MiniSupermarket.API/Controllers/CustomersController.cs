@@ -26,6 +26,48 @@ namespace MiniSupermarket.API.Controllers
             return Ok(list);
         }
 
+        // GET: api/customers/paged?pageNumber=1&pageSize=10
+        [HttpGet("paged")]
+        public async Task<IActionResult> GetPaged(
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            pageNumber = Math.Max(1, pageNumber);
+            if (pageSize < 1 || pageSize > 100)
+            {
+                pageSize = 10;
+            }
+
+            var query = _context.Customers.AsNoTracking();
+            var totalItems = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            pageNumber = totalPages == 0 ? 1 : Math.Min(pageNumber, totalPages);
+
+            var items = await query
+                .OrderByDescending(customer => customer.RewardPoints)
+                .ThenBy(customer => customer.CustomerId)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(customer => new CustomerItemDto
+                {
+                    CustomerId = customer.CustomerId,
+                    CustomerName = customer.CustomerName,
+                    PhoneNumber = customer.PhoneNumber,
+                    Address = customer.Address,
+                    RewardPoints = customer.RewardPoints,
+                    MembershipRank = customer.MembershipRank
+                })
+                .ToListAsync();
+
+            return Ok(new PagedResult<CustomerItemDto>
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalItems = totalItems,
+                TotalPages = totalPages,
+                Items = items
+            });
+        }
         // 2. GET: Lấy chi tiết khách hàng theo ID (/api/customers/{id})
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -105,3 +147,4 @@ namespace MiniSupermarket.API.Controllers
         }
     }
 }
+
