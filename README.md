@@ -1,6 +1,6 @@
-# 🛒 HỆ THỐNG QUẢN LÝ SIÊU THỊ MINI (MINISUPERMARKET SYSTEM)
+# 🛒 NGHIÊN CỨU VÀ HIỆN THỰC HÓA PHẦN MỀM QUẢN LÝ BÁN LẺ THEO CHUẨN KIẾN TRÚC DOANH NGHIỆP -- TIỆM TẠP HÓA NGỌC MAI
 > **Môn học:** Lập trình Ứng dụng .NET Core (Mã môn: 229162)  
-> **Buổi thực hành:** Buổi 1 - Xây dựng Web API quản lý danh mục và kết nối WinForms Client (CRUD)
+> **Buổi thực hành:** Buổi 4 - Kiến trúc Giao diện WinForms Shell (Sidebar & Main Workspace) và Điều hướng Phân quyền RBAC (Admin / Cashier / Warehouse)
 
 ---
 
@@ -58,3 +58,46 @@ Mã sinh viên: [2124110290]
 
 
 Lớp học phần: [CCQ2411D]
+
+---
+
+## Buổi 5 — ADO.NET, Stored Procedure và giao dịch POS
+
+Buổi 5 được triển khai trực tiếp với SQL Server database `TiemtaphoaNgocMai` đang cấu hình trong `MiniSupermarket.API/appsettings.json`.
+
+### Chuẩn bị database
+
+Trong SSMS, mở và chạy `MiniSupermarket.API/SqlScripts/Buoi5.sql` trên database `TiemtaphoaNgocMai`. Script chỉ bổ sung cột `Orders.RewardPointsAwarded` nếu chưa có và tạo lại `dbo.sp_GetRevenueByCashier`; dữ liệu hóa đơn hiện có được giữ lại. Cột điểm của các hóa đơn cũ mặc định là 0 vì database trước đây chưa lưu điểm thưởng theo từng hóa đơn.
+
+### Các phần thực hành
+
+| Nội dung | Endpoint / thành phần | Kỹ thuật ADO.NET |
+| --- | --- | --- |
+| Tra cứu mã vạch | `GET /api/ado-products/barcode/{barcode}` | `SqlConnection`, tham số hóa, `SqlDataReader` |
+| Tải danh sách ngoại tuyến | `GET /api/ado-products/disconnected-cache` | `SqlDataAdapter`, `DataTable` |
+| Lọc tồn kho | `GET /api/ado-products/filter-stock?minStock=50` | `SqlDataReader`, `SqlParameter` |
+| Đếm sản phẩm | `GET /api/ado-products/count` | `ExecuteScalar()` |
+| Tổng hợp theo danh mục | `GET /api/ado-products/category-summary` | `DataTable` |
+| Doanh thu theo cashier | `GET /api/reports/revenue-by-cashier` | `CommandType.StoredProcedure`, `SqlDataReader` |
+| Checkout POS | `POST /api/checkout` | `SqlTransaction`, `Commit`, `Rollback` |
+| Hủy hóa đơn | `DELETE /api/checkout/cancel/{orderId}` | Hoàn kho/điểm và xóa hóa đơn trong transaction; chỉ Admin |
+
+Các API yêu cầu đăng nhập bằng bearer token. Báo cáo doanh thu và hủy hóa đơn chỉ dành cho Admin. Cashier chỉ được checkout với tài khoản đang đăng nhập; giá sản phẩm luôn được đọc từ database, không tin giá gửi từ WinForms.
+
+### Kiểm tra trên Swagger
+
+1. Chạy `MiniSupermarket.API`, đăng nhập qua `POST /api/users/login`, rồi dùng token bearer để gọi các endpoint.
+2. Tra mã hiện có `893456789001` (200) và mã không tồn tại (404); tải cache và báo cáo theo cashier.
+3. POS WinForms hiện gọi endpoint ADO.NET để tra barcode và `POST /api/checkout` khi thanh toán.
+4. Thử giỏ có sản phẩm hợp lệ trước rồi thêm sản phẩm vượt tồn kho. Checkout trả 400 và rollback hóa đơn, chi tiết, tồn kho, điểm thưởng trong cùng giao dịch.
+
+Không dùng thanh toán hợp lệ trên database thật chỉ để thử nghiệm vì nó sẽ ghi hóa đơn và thay đổi tồn kho. Hãy dùng database kiểm thử riêng nếu cần đối soát một giao dịch Commit đầu-cuối.
+
+### Kết quả kiểm thử biệt lập
+
+Đã chạy bản build trên database tạm rồi xóa database tạm sau khi kiểm tra:
+
+- Checkout 2 món với số lượng lần lượt 2 và 3 trả 200, tổng tiền 89.000đ và cộng 8 điểm; giá gửi giả từ client không được dùng.
+- Trước khi hủy: tạo 1 hóa đơn/2 dòng chi tiết, tồn kho giảm 2 và 3, điểm khách tăng 8.
+- Hủy hóa đơn trả 200 và hoàn nguyên số hóa đơn, chi tiết, tồn kho, điểm về đúng trạng thái ban đầu.
+- Giỏ hàng có món thứ hai vượt kho trả 400; dù hóa đơn và món thứ nhất đã được ghi trong transaction, rollback đưa mọi dữ liệu về trạng thái ban đầu.

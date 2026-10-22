@@ -1,4 +1,4 @@
-﻿namespace MiniSupermarket.WinForms
+namespace MiniSupermarket.WinForms
 {
     partial class FormCategoryManagement
     {
@@ -54,8 +54,11 @@
             dgvCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCategories.Location = new Point(33, 78);
             dgvCategories.Name = "dgvCategories";
+            dgvCategories.ReadOnly = true;
+            dgvCategories.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCategories.Size = new Size(356, 199);
             dgvCategories.TabIndex = 0;
+            dgvCategories.CellClick += dgvCategories_CellClick;
             dgvCategories.CellContentClick += dgvCategories_CellContentClick;
             // 
             // txtId
@@ -90,6 +93,7 @@
             btnLoad.TabIndex = 5;
             btnLoad.Text = "Tai lai";
             btnLoad.UseVisualStyleBackColor = true;
+            btnLoad.Click += btnLoad_Click;
             // 
             // btnAdd
             // 
@@ -99,6 +103,7 @@
             btnAdd.TabIndex = 6;
             btnAdd.Text = "Them moi";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnUpdate
             // 
@@ -108,6 +113,7 @@
             btnUpdate.TabIndex = 7;
             btnUpdate.Text = "Cap nhat";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnDelete
             // 
@@ -117,6 +123,7 @@
             btnDelete.TabIndex = 8;
             btnDelete.Text = "Xoa";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnSearch
             // 
@@ -126,6 +133,7 @@
             btnSearch.TabIndex = 9;
             btnSearch.Text = "Tim kiem";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // information
             // 
@@ -211,7 +219,8 @@
             Controls.Add(List);
             Controls.Add(groupBox1);
             Name = "FormCategoryManagement";
-            Text = "FormCategoryManagement";
+            Text = "Quản lý Nhóm hàng - Tiệm Tạp hóa Ngọc Mai";
+            Load += FormCategoryManagement_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCategories).EndInit();
             information.ResumeLayout(false);
             information.PerformLayout();
