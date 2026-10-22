@@ -188,6 +188,11 @@ Tài khoản mẫu được khai báo trong dữ liệu khởi tạo của `Supe
 
 Đây là thông tin phục vụ demo môn học; hãy đổi thông tin xác thực nếu triển khai ngoài môi trường học tập.
 
-## Tác giả
+👨‍💻 5. Tác giả
+Họ tên sinh viên: [Nguyễn Thị Mộng Tuyền]
 
-**Nguyễn Thị Mộng Tuyền** · MSSV **2124110290** · Lớp **CCQ2411D**
+
+Mã sinh viên: [2124110290]
+
+
+Lớp học phần: [CCQ2411D]
