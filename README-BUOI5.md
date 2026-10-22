@@ -4,6 +4,12 @@
 **Môn học:** Lập trình Ứng dụng .NET Core (229162)
 **Nền tảng:** ASP.NET Core Web API, WinForms, ADO.NET, SQL Server
 
+## Thông tin sinh viên
+
+- **Họ và tên:** Nguyễn Thị Mộng Tuyền
+- **Mã số sinh viên:** 2124110290
+- **Lớp học phần:** CCQ2411D
+
 ## 1. Mục tiêu
 
 Buổi thực hành dùng ADO.NET để đọc và ghi dữ liệu SQL Server, gọi Stored Procedure và đảm bảo thanh toán POS có tính nguyên tử. Các lệnh SQL nhận dữ liệu từ người dùng đều dùng tham số `SqlParameter`; kết nối và command được giải phóng bằng `using`/`await using`.
